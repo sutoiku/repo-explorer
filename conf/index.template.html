@@ -1,0 +1,60 @@
+<!doctype html>
+<html ng-app>
+  <head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.min.js"></script>
+
+    <script type="text/javascript">
+
+function PackagesVersionsCtrl($scope) {
+  $scope.packagesVersions = ###INJECT_ME_HERE###;
+
+  $scope.getCssClass = function(status) {
+    if (status === 'UP TO DATE') {
+      return "";
+    } else if (status === 'OUTDATED') {
+      return "warning";
+    }
+    return "danger";
+  }
+}
+
+    </script>
+  </head>
+  <body ng-controller="PackagesVersionsCtrl">
+    <input
+      type="text" ng-model="search" class="search-query"
+      placeholder="Search anywhere"
+      style="width:99%; margin:10px; text-align:center;">
+
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Package</th>
+          <th>Dependency</th>
+          <th>Full Description</th>
+          <th>Dependency Version</th>
+          <th>Latest Version</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+        <tr ng-repeat="pv in packagesVersions | filter:filteredStatus | filter:search" ng-class="getCssClass(pv.info)">
+          <td>{{pv.packageName}}</td>
+          <td>{{pv.dependencyName}}</td>
+          <td>{{pv.dependencyDesc}}</td>
+          <td>{{pv.depVersion}}</td>
+          <td>{{pv.repositoryVersion}}</td>
+          <td>{{pv.info}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

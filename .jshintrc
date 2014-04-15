@@ -1,0 +1,37 @@
+
+{
+  "browser"   : true,
+  "curly"     : true,
+  "devel"     : true,
+  "eqeqeq"    : true,
+  "eqnull"    : true,
+  "es5"       : false,
+  "evil"      : false,
+  "expr"      : true,
+  "immed"     : false,
+  "jquery"    : true,
+  "latedef"   : false,
+  "laxcomma"  : true,
+  "newcap"    : true,
+  "node"      : true,
+  "noempty"   : false,
+  "nonew"     : true,
+  "predef":
+  [
+    "after",
+    "afterEach",
+    "before",
+    "beforeEach",
+    "describe",
+    "it",
+    "unescape",
+    "par",
+    "each",
+    "setImmediate"
+  ],
+  "unused"    : true,
+  "proto"     : true,
+  "smarttabs" : true,
+  "strict"    : false,
+  "undef"     : true
+}

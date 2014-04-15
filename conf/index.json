@@ -1,0 +1,7 @@
+{
+  "token"                : "<<your secret github token>>",
+  "resultFile"           : "./results.json",
+  "templateFile"         : "./conf/index.template.html",
+  "outputHTML"           : "./index.html",
+  "dependenciesToManage" : [ "dependencies", "devDependencies", "optionalDependencies", "bundledDependencies" ]
+}

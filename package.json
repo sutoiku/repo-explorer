@@ -1,0 +1,20 @@
+{
+  "author"     : "Yves Le Maout <yves@stoic.com>",
+  "name"       : "repo-explorer",
+  "version"    : "0.0.1",
+  "readme"     : "README.md",
+  "main"       : "index.js",
+  "repository" : {
+    "type" : "git",
+    "url"  : "http://github.com/sutoiku/repo-explorer"
+  },
+  "engines" : {
+    "node"   : "*",
+    "npm"    : "*"
+  },
+  "dependencies": {
+    "debug"  : "*",
+    "github" : "*",
+    "semver" : "*"
+  }
+}
