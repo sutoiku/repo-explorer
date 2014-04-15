@@ -22,6 +22,8 @@ function PackagesVersionsCtrl($scope) {
     }
     return "danger";
   }
+
+  $scope.predicate = "packageName";
 }
 
     </script>
@@ -46,7 +48,7 @@ function PackagesVersionsCtrl($scope) {
 
 
       <tbody>
-        <tr ng-repeat="pv in packagesVersions | filter:filteredStatus | filter:search" ng-class="getCssClass(pv.info)">
+        <tr ng-repeat="pv in packagesVersions | filter:filteredStatus | filter:search | orderBy:predicate" ng-class="getCssClass(pv.info)">
           <td>{{pv.packageName}}</td>
           <td>{{pv.dependencyName}}</td>
           <td>{{pv.dependencyDesc}}</td>
