@@ -87,7 +87,7 @@ function PackagesVersionsCtrl($scope) {
 
 
       <tbody>
-        <tr ng-repeat="pv in packagesVersions | filter:filterObj | filter:search | orderBy:predicate"
+        <tr ng-repeat="pv in packagesVersions | filter:filterObj:true | filter:search | orderBy:predicate"
             ng-class="getCssClass(pv.info)" >
           <td>{{pv.packageName}}</td>
           <td>{{pv.dependencyName}}</td>
