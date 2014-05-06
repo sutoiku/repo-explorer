@@ -7,7 +7,7 @@
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
 
     <script type="text/javascript">
 
@@ -21,9 +21,34 @@ function PackagesVersionsCtrl($scope) {
       return "warning";
     }
     return "danger";
-  }
+  };
 
   $scope.predicate = "packageName";
+  $scope.distincts = {};
+  $scope.filterObj = {};
+
+  $scope.resetFilter = function(k) {
+    delete $scope.filterObj[k];
+  };
+
+  // Build distincts with a set.
+  var distincts = {};
+  for (var i = 0; i < $scope.packagesVersions.length; i++) {
+    var pvKeys = Object.keys($scope.packagesVersions[i]);
+    for (var j = 0; j < pvKeys.length; j++) {
+      var key = pvKeys[j];
+      distincts[key] = distincts[key] || {};
+      distincts[key][$scope.packagesVersions[i][key]] = true;
+    }
+  }
+
+  // Transform it into array.
+  var distinctsKeys = Object.keys(distincts);
+  for (var i = 0; i < distinctsKeys.length; i++) {
+    $scope.distincts[distinctsKeys[i]] = Object.keys(distincts[distinctsKeys[i]]);
+  }
+
+  console.log($scope.distincts);
 }
 
     </script>
@@ -44,11 +69,26 @@ function PackagesVersionsCtrl($scope) {
           <th>Latest Version</th>
           <th>Status</th>
         </tr>
+        <tr>
+          <th><select ng-options="v for v in distincts.packageName" ng-model="filterObj.packageName"></select>
+              <a href="" ng-click="resetFilter('packageName')">X</a></th>
+          <th><select ng-options="v for v in distincts.dependencyName" ng-model="filterObj.dependencyName"></select>
+              <a href="" ng-click="resetFilter('dependencyName')">X</a></th>
+          <th><select ng-options="v for v in distincts.dependencyDesc" ng-model="filterObj.dependencyDesc"></select>
+              <a href="" ng-click="resetFilter('dependencyDesc')">X</a></th>
+          <th><select ng-options="v for v in distincts.depVersion" ng-model="filterObj.depVersion"></select>
+              <a href="" ng-click="resetFilter('depVersion')">X</a></th>
+          <th><select ng-options="v for v in distincts.repositoryVersion" ng-model="filterObj.repositoryVersion"></select>
+              <a href="" ng-click="resetFilter('repositoryVersion')">X</a></th>
+          <th><select ng-options="v for v in distincts.info" ng-model="filterObj.info"></select>
+              <a href="" ng-click="resetFilter('info')">X</a></th>
+        </tr>
       </thead>
 
 
       <tbody>
-        <tr ng-repeat="pv in packagesVersions | filter:filteredStatus | filter:search | orderBy:predicate" ng-class="getCssClass(pv.info)">
+        <tr ng-repeat="pv in packagesVersions | filter:filterObj | filter:search | orderBy:predicate"
+            ng-class="getCssClass(pv.info)" >
           <td>{{pv.packageName}}</td>
           <td>{{pv.dependencyName}}</td>
           <td>{{pv.dependencyDesc}}</td>
