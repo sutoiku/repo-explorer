@@ -45,7 +45,7 @@ function PackagesVersionsCtrl($scope) {
   // Transform it into array.
   var distinctsKeys = Object.keys(distincts);
   for (var i = 0; i < distinctsKeys.length; i++) {
-    $scope.distincts[distinctsKeys[i]] = Object.keys(distincts[distinctsKeys[i]]);
+    $scope.distincts[distinctsKeys[i]] = Object.keys(distincts[distinctsKeys[i]]).sort();
   }
 
   console.log($scope.distincts);
