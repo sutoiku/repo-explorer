@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.7/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.6.0/moment.min.js"></script>
 
     <script type="text/javascript">
 
@@ -31,6 +32,18 @@ function PackagesVersionsCtrl($scope) {
     delete $scope.filterObj[k];
   };
 
+  $scope.updatedDate = moment(new Date("##UPDATE_TIMESTAMP##"));
+  $scope.updatedAgo  = "";
+
+  $scope.nowDate = moment(new Date());
+
+  $scope.updatedOn = function() {
+    $scope.updatedAgo = $scope.updatedDate.fromNow();
+    $scope.nowDate    = moment(new Date());
+    $scope.$apply();
+    setTimeout($scope.updatedOn, 1000);
+  };
+
   // Build distincts with a set.
   var distincts = {};
   for (var i = 0; i < $scope.packagesVersions.length; i++) {
@@ -48,7 +61,7 @@ function PackagesVersionsCtrl($scope) {
     $scope.distincts[distinctsKeys[i]] = Object.keys(distincts[distinctsKeys[i]]).sort();
   }
 
-  console.log($scope.distincts);
+  setTimeout($scope.updatedOn, 0);
 }
 
     </script>
@@ -98,6 +111,6 @@ function PackagesVersionsCtrl($scope) {
         </tr>
       </tbody>
     </table>
-  <p>##UPDATE_TIMESTAMP##</p>
+  <p>Updated {{updatedAgo}} (on {{updatedDate.format('LLLL')}})</p>
   </body>
 </html>
