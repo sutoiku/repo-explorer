@@ -80,6 +80,7 @@ function PackagesVersionsCtrl($scope) {
           <th>Full Description</th>
           <th>Dependency Version</th>
           <th>Latest Version</th>
+          <th>Type</th>
           <th>Status</th>
         </tr>
         <tr>
@@ -93,6 +94,8 @@ function PackagesVersionsCtrl($scope) {
               <a href="" ng-click="resetFilter('depVersion')">X</a></th>
           <th><select ng-options="v for v in distincts.repositoryVersion" ng-model="filterObj.repositoryVersion"></select>
               <a href="" ng-click="resetFilter('repositoryVersion')">X</a></th>
+          <th><select ng-options="v for v in distincts.dependencyType" ng-model="filterObj.dependencyType"></select>
+              <a href="" ng-click="resetFilter('dependencyType')">X</a></th>
           <th><select ng-options="v for v in distincts.info" ng-model="filterObj.info"></select>
               <a href="" ng-click="resetFilter('info')">X</a></th>
         </tr>
@@ -107,6 +110,7 @@ function PackagesVersionsCtrl($scope) {
           <td>{{pv.dependencyDesc}}</td>
           <td>{{pv.depVersion}}</td>
           <td>{{pv.repositoryVersion}}</td>
+          <td>{{pv.dependencyType}}</td>
           <td>{{pv.info}}</td>
         </tr>
       </tbody>
